@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# T-World: Scalable Ecommerce Architecture
+T-World is a full-stack ecommerce platform designed to handle custom apparel sales. The project was built with the goal of creating a seamless transition between a high-performance frontend and a robust data layer, specifically tailored for categorized products like Anime, Rock, and Pop culture merchandise.
 
-## Getting Started
+## The Vision
+The core objective was to build an MVP that didn't compromise on type safety or scalability. By choosing a unified stack, I was able to focus on business logic—such as inventory management and secure checkout flows—while maintaining a clean codebase that is easy to maintain and extend.
 
-First, run the development server:
+## Technical Decisions
+### Unified Full-Stack Framework
+I implemented Next.js using the App Router. This allowed for a centralized architecture where frontend components and server-side logic (API Routes) coexist. This decision significantly reduced latency in data fetching and simplified the deployment pipeline.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Data Integrity with Prisma & PostgreSQL
+For the persistence layer, I chose PostgreSQL coupled with Prisma ORM.
+
+- **Why Prisma?** It provides an automated type-safe client that prevents common runtime errors during database queries.
+
+- **Schema Design:** The relational model was designed to handle complex product variations, including sizes, colors, and hierarchical categories, ensuring that the inventory stays consistent across all user sessions.
+
+### Security and Sessions
+Authentication is handled via NextAuth.js, implementing a secure layer for user sessions. This ensures that sensitive operations, such as order history and profile management, are strictly protected and follow industry standards.
+
+## Key Features
+- **Dynamic Catalog:** Real-time filtering and categorization based on cultural interests.
+
+- **State-Managed Checkout:** A robust cart system that preserves user selections across the application.
+
+- **Relational Database:** Optimized PostgreSQL schema for fast retrieval of product metadata.
+
+- **Admin-Ready Architecture:** Structured to allow future implementation of an administrative dashboard for inventory control.
+
+### Development and Environment
+#### Prerequisites
+- Node.js 18+
+- Docker and Docker Compose (recommended for database local environment)
+
+#### Local Setup
+- Clone the repository.
+
+- Install dependencies: `npm install`.
+
+- Set up your environment variables in a .env file (Database URL, NextAuth Secret).
+
+- Run Prisma migrations: `npx prisma migrate dev`.
+
+- Start the development server: `npm run dev`.
+
+#### Containerization
+The project includes a Docker configuration to ensure consistent environments across development and production. To spin up the entire stack including the PostgreSQL database:
+
+
+```Bash
+docker-compose up --build
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

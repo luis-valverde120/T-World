@@ -28,6 +28,14 @@ export default function Navbar() {
         >
           Productos
         </Link>
+        {status === "authenticated" && (
+          <Link
+            href="/mis-compras"
+            className="font-medium text-gray-600 hover:text-gray-900"
+          >
+            Mis Compras
+          </Link>
+        )}
       </div>
 
       {/* Contenido de la Derecha (Login / Usuario) */}
